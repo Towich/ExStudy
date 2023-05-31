@@ -6,14 +6,37 @@ import androidx.lifecycle.ViewModel;
 
 public class HomeViewModel extends ViewModel {
 
-    private final MutableLiveData<String> mText;
+    private final HomeRepository mHomeRepository;
+
+    private final MutableLiveData<String> mTimerText;
+
+    private final MutableLiveData<String> mTimerTextSeconds;
 
     public HomeViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is home fragment");
+        mHomeRepository = new HomeRepository();
+        mTimerText = mHomeRepository.getTimerText();
+        mTimerTextSeconds = mHomeRepository.getTimerTextSeconds();
     }
 
     public LiveData<String> getText() {
-        return mText;
+        return mTimerText;
+    }
+
+    public String getTimerString() {
+        return mHomeRepository.getTimerText().getValue();
+    }
+
+    public void startTimer(int duration){
+        mHomeRepository.startTimer(duration);
+    }
+
+    public void stopTimer(){ mHomeRepository.stopTimer(); }
+
+    public MutableLiveData<String> getTimerTextSeconds() {
+        return mTimerTextSeconds;
+    }
+
+    public String getTimerSecondsString(){
+        return mTimerTextSeconds.getValue();
     }
 }
