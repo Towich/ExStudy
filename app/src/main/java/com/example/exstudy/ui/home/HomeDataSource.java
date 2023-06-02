@@ -15,13 +15,13 @@ public class HomeDataSource {
 
     public static MutableLiveData<String> createTimerTextData(){
         timerText = new MutableLiveData<>();
-        timerText.setValue("30'");
+        timerText.setValue("30");
         return timerText;
     }
 
     public static MutableLiveData<String> createTimerTextSecondsData(){
         timerTextSeconds = new MutableLiveData<>();
-        timerTextSeconds.setValue("00''");
+        timerTextSeconds.setValue("00");
         return timerTextSeconds;
     }
 
@@ -33,8 +33,8 @@ public class HomeDataSource {
             public void onTick(long millisUntilFinished) {
                 long sec = (millisUntilFinished / 1000) % 60;
                 long min = millisUntilFinished / 60000;
-                timerText.setValue(f.format(min) + "'");
-                timerTextSeconds.setValue(f.format(sec) + "''");
+                timerText.setValue(f.format(min));
+                timerTextSeconds.setValue(f.format(sec));
                 Log.i("TIMER", f.format(min) + ':' + f.format(sec));
             }
             // When the task is over

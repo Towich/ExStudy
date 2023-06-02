@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -39,22 +40,40 @@ public class HomeFragment extends Fragment {
 
         final TextView textViewTimer = binding.textHome;
         final TextView textViewTimerSeconds = binding.textHomeTimerSeconds;
+
+        textViewTimerSeconds.setBackgroundColor(0);
         final ImageButton buttonStartTimer = binding.buttonHomeStartTimer;
         final ImageButton buttonSettings = binding.buttonHomeSettings;
+        final ProgressBar progressBar = binding.progressBarHome;
 
         homeViewModel.getText().observe(getViewLifecycleOwner(), mTimerText -> {
-            textViewTimer.setText(homeViewModel.getTimerString());
+            String current_minutes = homeViewModel.getTimerString() + "'";
+            textViewTimer.setText(current_minutes);
         });
 
         homeViewModel.getTimerTextSeconds().observe(getViewLifecycleOwner(), mTimerTextSeconds -> {
-            textViewTimerSeconds.setText(homeViewModel.getTimerSecondsString());
+            String current_seconds = homeViewModel.getTimerSecondsString();
+
+            int current_minutes_int = Integer.parseInt(homeViewModel.getTimerString());
+            int current_seconds_int = Integer.parseInt(current_seconds);
+
+            progressBar.setProgress(current_minutes_int * 60 + current_seconds_int);
+
+            current_seconds += "''";
+            textViewTimerSeconds.setText(current_seconds);
         });
 
         getParentFragmentManager().setFragmentResultListener(SettingsFragment.RESULT_SETTINGS_FRAGMENT,
                 this, (requestKey, result) -> {
                     Log.i("HOMEFRAGMENT", result.toString());
-                    homeViewModel.setTimerMinutes(result.getString(SettingsFragment.MINUTES_KEY) + "'");
-                    homeViewModel.setTimerSeconds(result.getString(SettingsFragment.SECONDS_KEY) + "''");
+
+                    String minutes = result.getString(SettingsFragment.MINUTES_KEY);
+                    String seconds = result.getString(SettingsFragment.SECONDS_KEY);
+
+                    homeViewModel.setTimerMinutes(minutes);
+                    homeViewModel.setTimerSeconds(seconds);
+
+                    progressBar.setMax(Integer.parseInt(minutes) * 60 + Integer.parseInt(seconds));
                 });
 
         buttonStartTimer.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +85,11 @@ public class HomeFragment extends Fragment {
                     int minutes = Integer.parseInt(textViewTimer.getText().toString().replace("'", ""));
                     int seconds = Integer.parseInt(textViewTimerSeconds.getText().toString().replace("'", ""));
 
-                    homeViewModel.startTimer(60 * minutes + seconds);
+                    int duration = 60 * minutes + seconds;
+
+                    progressBar.setMax(duration);
+
+                    homeViewModel.startTimer(duration);
                     buttonStartTimer.setImageResource(R.drawable.baseline_pause_24);
                 }
                 else{
