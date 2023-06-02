@@ -10,4 +10,9 @@
 
     <color name="wood_200">#E2D6CA</color>
     <color name="wood_500">#B7984C</color>
+    
+    <color name="blue_500">#5d4ddb</color>
+    <color name="blue_200">#4ba2e6</color>
+    <color name="white_200">#e2e2e6</color>
+    <color name="black_200">#211e24</color>
 </resources>

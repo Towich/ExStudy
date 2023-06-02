@@ -24,7 +24,6 @@ public class HomeRepository {
         return mTimerTextSeconds;
     }
 
-
     public void startTimer(int duration){
         timer = HomeDataSource.createTimer(duration).start();
     }
