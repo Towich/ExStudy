@@ -29,6 +29,8 @@ public class HomeRepository {
     }
 
     public void stopTimer(){
+        mTimerText.setValue("30'");
+        mTimerTextSeconds.setValue("00''");
         timer.cancel();
     }
 }

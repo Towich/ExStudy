@@ -53,8 +53,8 @@ public class HomeFragment extends Fragment {
         getParentFragmentManager().setFragmentResultListener(SettingsFragment.RESULT_SETTINGS_FRAGMENT,
                 this, (requestKey, result) -> {
                     Log.i("HOMEFRAGMENT", result.toString());
-                    homeViewModel.setTimerMinutes(result.getString(SettingsFragment.MINUTES_KEY));
-                    homeViewModel.setTimerSeconds(result.getString(SettingsFragment.SECONDS_KEY));
+                    homeViewModel.setTimerMinutes(result.getString(SettingsFragment.MINUTES_KEY) + "'");
+                    homeViewModel.setTimerSeconds(result.getString(SettingsFragment.SECONDS_KEY) + "''");
                 });
 
         buttonStartTimer.setOnClickListener(new View.OnClickListener() {
@@ -62,9 +62,9 @@ public class HomeFragment extends Fragment {
             public void onClick(View view) {
                 boolean timerEnabled = homeViewModel.isTimerEnabled();
 
-                if(!homeViewModel.isTimerEnabled()) {
-                    int minutes = Integer.parseInt(textViewTimer.getText().toString());
-                    int seconds = Integer.parseInt(textViewTimerSeconds.getText().toString());
+                if(!timerEnabled) {
+                    int minutes = Integer.parseInt(textViewTimer.getText().toString().replace("'", ""));
+                    int seconds = Integer.parseInt(textViewTimerSeconds.getText().toString().replace("'", ""));
 
                     homeViewModel.startTimer(60 * minutes + seconds);
                     buttonStartTimer.setImageResource(R.drawable.baseline_pause_24);

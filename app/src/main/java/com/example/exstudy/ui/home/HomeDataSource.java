@@ -28,11 +28,11 @@ public class HomeDataSource {
     public static CountDownTimer createTimer(int duration){
         return new CountDownTimer(duration * 1000L + 500, 1000) {
 
-            NumberFormat f = new DecimalFormat("00");
+            final NumberFormat f = new DecimalFormat("00");
             // Every tick
             public void onTick(long millisUntilFinished) {
                 long sec = (millisUntilFinished / 1000) % 60;
-                long min = (millisUntilFinished / 60000) % 60;
+                long min = millisUntilFinished / 60000;
                 timerText.setValue(f.format(min) + "'");
                 timerTextSeconds.setValue(f.format(sec) + "''");
                 Log.i("TIMER", f.format(min) + ':' + f.format(sec));
