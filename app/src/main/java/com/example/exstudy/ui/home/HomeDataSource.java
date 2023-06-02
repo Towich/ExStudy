@@ -10,18 +10,21 @@ import java.text.NumberFormat;
 
 public class HomeDataSource {
 
+    public static final String DEFAULT_MINUTES = "30";
+    public static final String DEFAULT_SECONDS = "00";
+
     private static MutableLiveData<String> timerText;
     private static MutableLiveData<String> timerTextSeconds;
 
     public static MutableLiveData<String> createTimerTextData(){
         timerText = new MutableLiveData<>();
-        timerText.setValue("30");
+        timerText.setValue(DEFAULT_MINUTES);
         return timerText;
     }
 
     public static MutableLiveData<String> createTimerTextSecondsData(){
         timerTextSeconds = new MutableLiveData<>();
-        timerTextSeconds.setValue("00");
+        timerTextSeconds.setValue(DEFAULT_SECONDS);
         return timerTextSeconds;
     }
 
@@ -39,8 +42,8 @@ public class HomeDataSource {
             }
             // When the task is over
             public void onFinish() {
-                timerText.setValue("это победа");
-                timerTextSeconds.setValue("");
+                timerText.setValue("00");
+                timerTextSeconds.setValue("00");
             }
         };
     }

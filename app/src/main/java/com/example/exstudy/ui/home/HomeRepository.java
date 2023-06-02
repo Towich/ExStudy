@@ -29,8 +29,8 @@ public class HomeRepository {
     }
 
     public void stopTimer(){
-        mTimerText.setValue("30");
-        mTimerTextSeconds.setValue("00");
+        mTimerText.setValue(HomeDataSource.DEFAULT_MINUTES);
+        mTimerTextSeconds.setValue(HomeDataSource.DEFAULT_SECONDS);
         timer.cancel();
     }
 }

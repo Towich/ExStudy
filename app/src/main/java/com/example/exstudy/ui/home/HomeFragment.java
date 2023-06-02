@@ -1,5 +1,7 @@
 package com.example.exstudy.ui.home;
 
+import static com.example.exstudy.ui.home.HomeDataSource.DEFAULT_MINUTES;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,6 +21,9 @@ import androidx.navigation.Navigation;
 import com.example.exstudy.R;
 import com.example.exstudy.databinding.FragmentHomeBinding;
 import com.example.exstudy.ui.settings.SettingsFragment;
+
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 
 public class HomeFragment extends Fragment {
 
@@ -67,11 +72,13 @@ public class HomeFragment extends Fragment {
                 this, (requestKey, result) -> {
                     Log.i("HOMEFRAGMENT", result.toString());
 
+                    final NumberFormat f = new DecimalFormat("00");
+
                     String minutes = result.getString(SettingsFragment.MINUTES_KEY);
                     String seconds = result.getString(SettingsFragment.SECONDS_KEY);
 
-                    homeViewModel.setTimerMinutes(minutes);
-                    homeViewModel.setTimerSeconds(seconds);
+                    homeViewModel.setTimerMinutes(f.format(Integer.parseInt(minutes)));
+                    homeViewModel.setTimerSeconds(f.format(Integer.parseInt(seconds)));
 
                     progressBar.setMax(Integer.parseInt(minutes) * 60 + Integer.parseInt(seconds));
                 });
@@ -82,8 +89,8 @@ public class HomeFragment extends Fragment {
                 boolean timerEnabled = homeViewModel.isTimerEnabled();
 
                 if(!timerEnabled) {
-                    int minutes = Integer.parseInt(textViewTimer.getText().toString().replace("'", ""));
-                    int seconds = Integer.parseInt(textViewTimerSeconds.getText().toString().replace("'", ""));
+                    int minutes = Integer.parseInt(homeViewModel.getTimerString());
+                    int seconds = Integer.parseInt(homeViewModel.getTimerSecondsString());
 
                     int duration = 60 * minutes + seconds;
 
@@ -95,17 +102,14 @@ public class HomeFragment extends Fragment {
                 else{
                     homeViewModel.stopTimer();
                     buttonStartTimer.setImageResource(R.drawable.baseline_play_arrow_24);
+                    progressBar.setMax(Integer.parseInt(DEFAULT_MINUTES));
                 }
             }
         });
 
-        buttonSettings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.settingsFragment);
-            }
-        });
-
+        buttonSettings.setOnClickListener(view ->
+                Navigation.findNavController(view).navigate(R.id.settingsFragment)
+        );
 
         return root;
     }

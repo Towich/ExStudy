@@ -10,23 +10,6 @@
     <!-- TODO: Update blank fragment layout -->
 
     <EditText
-        android:id="@+id/edit_text_settings_minutes"
-        android:layout_width="100dp"
-        android:layout_height="120dp"
-        android:backgroundTint="@color/blue_500"
-        android:inputType="numberDecimal"
-        android:text="30"
-        android:textAlignment="center"
-        android:textColor="@color/white_200"
-        android:textSize="50sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.347"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499" />
-
-    <EditText
         android:id="@+id/edit_text_settings_seconds"
         android:layout_width="100dp"
         android:layout_height="120dp"
@@ -41,7 +24,24 @@
         app:layout_constraintHorizontal_bias="0.668"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499" />
+        app:layout_constraintVertical_bias="0.217" />
+
+    <EditText
+        android:id="@+id/edit_text_settings_minutes"
+        android:layout_width="100dp"
+        android:layout_height="120dp"
+        android:backgroundTint="@color/blue_500"
+        android:inputType="numberDecimal"
+        android:text="30"
+        android:textAlignment="center"
+        android:textColor="@color/white_200"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.347"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.217" />
 
     <ImageButton
         android:id="@+id/button_settings_back_to_home"
