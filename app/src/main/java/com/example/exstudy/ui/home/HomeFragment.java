@@ -51,6 +51,14 @@ public class HomeFragment extends Fragment {
         final ImageButton buttonSettings = binding.buttonHomeSettings;
         final ProgressBar progressBar = binding.progressBarHome;
 
+        progressBar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i("PROGRESSBAR", "Hai!)");
+                Navigation.findNavController(view).navigate(R.id.inventoryFragment);
+            }
+        });
+
         homeViewModel.getText().observe(getViewLifecycleOwner(), mTimerText -> {
             String current_minutes = homeViewModel.getTimerString() + "'";
             textViewTimer.setText(current_minutes);
