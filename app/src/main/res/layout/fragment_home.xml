@@ -77,14 +77,28 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:layout_width="90dp"
-        android:layout_height="90dp"
+        android:id="@+id/seeds_image"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
         android:background="#00000000"
-        android:src="@drawable/lemon"
+        android:src="@drawable/seeds_coconut"
         app:layout_constraintBottom_toBottomOf="@+id/progress_bar_home"
         app:layout_constraintEnd_toEndOf="@+id/progress_bar_home"
         app:layout_constraintStart_toStartOf="@+id/progress_bar_home"
         app:layout_constraintTop_toTopOf="@+id/progress_bar_home" />
+
+    <TextView
+        android:id="@+id/seeds_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00000000"
+        android:text="Coconut"
+        android:textSize="20sp"
+        android:layout_marginTop="-16dp"
+        app:layout_constraintEnd_toEndOf="@+id/seeds_image"
+        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintStart_toStartOf="@+id/seeds_image"
+        app:layout_constraintTop_toBottomOf="@+id/seeds_image" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

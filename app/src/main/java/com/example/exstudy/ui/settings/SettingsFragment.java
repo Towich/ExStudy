@@ -42,19 +42,15 @@ public class SettingsFragment extends Fragment {
         final EditText edit_text_seconds = binding.editTextSettingsSeconds;
         final ImageButton button_to_home = binding.buttonSettingsBackToHome;
 
-        button_to_home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bundle bundle = new Bundle();
+        button_to_home.setOnClickListener(view1 -> {
+            Bundle bundle = new Bundle();
 
-                bundle.putString(MINUTES_KEY, edit_text_minutes.getText().toString());
-                bundle.putString(SECONDS_KEY, edit_text_seconds.getText().toString());
+            bundle.putString(MINUTES_KEY, edit_text_minutes.getText().toString());
+            bundle.putString(SECONDS_KEY, edit_text_seconds.getText().toString());
 
-                getParentFragmentManager().setFragmentResult(RESULT_SETTINGS_FRAGMENT, bundle);
+            getParentFragmentManager().setFragmentResult(RESULT_SETTINGS_FRAGMENT, bundle);
 
-
-                Navigation.findNavController(view).navigate(R.id.navigation_home);
-            }
+            Navigation.findNavController(view1).navigate(R.id.navigation_home);
         });
     }
 }

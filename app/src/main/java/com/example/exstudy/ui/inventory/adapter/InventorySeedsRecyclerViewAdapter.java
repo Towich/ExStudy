@@ -1,6 +1,7 @@
 package com.example.exstudy.ui.inventory.adapter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,10 +10,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.exstudy.R;
 import com.example.exstudy.data.model.SeedModel;
+import com.example.exstudy.ui.inventory.InventoryDataSource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,9 +48,10 @@ public class InventorySeedsRecyclerViewAdapter extends RecyclerView.Adapter<Inve
 
         holder.name.setText(currentModel.getName());
         holder.image.setImageResource(currentModel.getImage());
+        holder.image.setTag(currentModel.getImage());
 
-        String timeToGrow = "Time to grow: " + currentModel.getTimeToGrow() + "'";
-        holder.time_to_grow.setText(timeToGrow);
+        //String timeToGrow = "Time to grow: " + currentModel.getTimeToGrow() + "'";
+        holder.time_to_grow.setText(Integer.toString(currentModel.getTimeToGrow()));
         holder.quantity.setText(Integer.toString(currentModel.getQuantity()));
     }
 
@@ -71,11 +75,20 @@ public class InventorySeedsRecyclerViewAdapter extends RecyclerView.Adapter<Inve
             time_to_grow = itemView.findViewById(R.id.seed_item_time_to_grow);
             quantity = itemView.findViewById(R.id.seed_item_quantity);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Log.i(name.getText().toString(), time_to_grow.getText().toString());
-                }
+            // Click on seeds
+            itemView.setOnClickListener(view -> {
+                String seeds_name = name.getText().toString();
+                String seeds_time_to_grow = time_to_grow.getText().toString();
+                int seeds_image = (int) image.getTag();
+
+                Log.i(seeds_name, seeds_time_to_grow);
+
+                Bundle bundle = new Bundle();
+                bundle.putString(InventoryDataSource.KEY_SEEDS_NAME, seeds_name);
+                bundle.putString(InventoryDataSource.KEY_SEEDS_TIME_TO_GROW, seeds_time_to_grow);
+                bundle.putInt(InventoryDataSource.KEY_SEEDS_IMAGE, seeds_image);
+
+                Navigation.findNavController(view).navigate(R.id.navigation_home, bundle);
             });
         }
     }

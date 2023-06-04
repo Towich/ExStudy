@@ -25,12 +25,13 @@
 
             <ImageView
                 android:id="@+id/seed_item_image"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:padding="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/lemon" />
+                app:srcCompat="@drawable/seeds_coconut" />
 
             <TextView
                 android:id="@+id/seed_item_name"

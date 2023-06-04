@@ -10,6 +10,10 @@ import java.util.List;
 
 public class InventoryDataSource {
 
+    public static final String KEY_SEEDS_NAME = "KEY_SEEDS_NAME";
+    public static final String KEY_SEEDS_TIME_TO_GROW = "KEY_SEEDS_TIME_TO_GROW";
+    public static final String KEY_SEEDS_IMAGE = "KEY_SEEDS_IMAGE";
+
     private static MutableLiveData<List<SeedModel>> inventory_seeds;
 
     public static MutableLiveData<List<SeedModel>> createInventory(){
@@ -17,8 +21,8 @@ public class InventoryDataSource {
 
         List<SeedModel> seedModels = new ArrayList<>();
 
-        SeedModel lemonModel = new SeedModel("Lemon", R.drawable.lemon, 30, 1);
-        SeedModel coconutModel = new SeedModel("Coconut", R.drawable.coconut_cut, 45, 2);
+        SeedModel lemonModel = new SeedModel("Lemon", R.drawable.seeds_lemon, 30, 1);
+        SeedModel coconutModel = new SeedModel("Coconut", R.drawable.seeds_coconut, 45, 2);
         seedModels.add(lemonModel);
         seedModels.add(coconutModel);
         seedModels.add(coconutModel);
