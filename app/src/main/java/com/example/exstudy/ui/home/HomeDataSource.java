@@ -12,9 +12,12 @@ public class HomeDataSource {
 
     public static final String DEFAULT_MINUTES = "30";
     public static final String DEFAULT_SECONDS = "00";
+    public static final String DEFAULT_SEEDS = "Lemon";
 
     private static MutableLiveData<String> timerText;
     private static MutableLiveData<String> timerTextSeconds;
+
+    private static MutableLiveData<Boolean> showingPlantResult;
 
     public static MutableLiveData<String> createTimerTextData(){
         timerText = new MutableLiveData<>();
@@ -26,6 +29,12 @@ public class HomeDataSource {
         timerTextSeconds = new MutableLiveData<>();
         timerTextSeconds.setValue(DEFAULT_SECONDS);
         return timerTextSeconds;
+    }
+
+    public static MutableLiveData<Boolean> createShowingPlantResult(){
+        showingPlantResult = new MutableLiveData<>();
+        //showingPlantResult.setValue(false);
+        return showingPlantResult;
     }
 
     public static CountDownTimer createTimer(int duration){
@@ -44,6 +53,7 @@ public class HomeDataSource {
             public void onFinish() {
                 timerText.setValue("00");
                 timerTextSeconds.setValue("00");
+                showingPlantResult.setValue(true);
             }
         };
     }

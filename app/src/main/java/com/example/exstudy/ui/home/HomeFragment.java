@@ -41,6 +41,7 @@ public class HomeFragment extends Fragment {
     private ProgressBar progressBar;
     private ImageView seeds_image;
     private TextView seeds_name;
+    private String seeds_minutes;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,26 +65,37 @@ public class HomeFragment extends Fragment {
 
         seeds_image = binding.seedsImage;
         seeds_name = binding.seedsName;
+        seeds_minutes = "30";
 
         GetBundleFromSeedsInventory();
 
-        // Timer: minutes
+        // Subscribe Timer: minutes
         homeViewModel.getText().observe(getViewLifecycleOwner(), mTimerText -> {
             String current_minutes = homeViewModel.getTimerString() + "'";
             textViewTimer.setText(current_minutes);
         });
 
-        // Timer: seconds
+        // Subscribe Timer: seconds
         homeViewModel.getTimerTextSeconds().observe(getViewLifecycleOwner(), mTimerTextSeconds -> {
+
+            String current_minutes = homeViewModel.getTimerString();
             String current_seconds = homeViewModel.getTimerSecondsString();
 
-            int current_minutes_int = Integer.parseInt(homeViewModel.getTimerString());
+            int current_minutes_int = Integer.parseInt(current_minutes);
             int current_seconds_int = Integer.parseInt(current_seconds);
 
             progressBar.setProgress(current_minutes_int * 60 + current_seconds_int);
 
             current_seconds += "''";
             textViewTimerSeconds.setText(current_seconds);
+        });
+
+        // Subscribe End Timer
+        homeViewModel.getShowingPlantResult().observe(getViewLifecycleOwner(), mShowingPlantResult -> {
+
+            // TODO
+            // Showing EndTimerDialogue
+            Log.i("HOME", "yes, changing.");
         });
 
         ConnectButtons();
@@ -97,7 +109,7 @@ public class HomeFragment extends Fragment {
         super.onDestroyView();
 
         if(homeViewModel.isTimerEnabled())
-            homeViewModel.stopTimer();
+            homeViewModel.stopTimer(seeds_minutes);
 
         binding = null;
     }
@@ -125,7 +137,7 @@ public class HomeFragment extends Fragment {
                 buttonStartTimer.setImageResource(R.drawable.baseline_pause_24);
             }
             else{
-                homeViewModel.stopTimer();
+                homeViewModel.stopTimer(seeds_minutes);
                 buttonStartTimer.setImageResource(R.drawable.baseline_play_arrow_24);
                 progressBar.setMax(Integer.parseInt(DEFAULT_MINUTES));
             }
@@ -157,6 +169,7 @@ public class HomeFragment extends Fragment {
         if(seeds_bundle != null){
             String mSeedsName = seeds_bundle.getString(InventoryDataSource.KEY_SEEDS_NAME);
             String mSeedsTimeToGrow = seeds_bundle.getString(InventoryDataSource.KEY_SEEDS_TIME_TO_GROW);
+            seeds_minutes = mSeedsTimeToGrow;
             int mSeedsImage = seeds_bundle.getInt(InventoryDataSource.KEY_SEEDS_IMAGE);
 
             Log.i("HOME", mSeedsName + " : " + mSeedsTimeToGrow + " : " + mSeedsImage);

@@ -12,6 +12,8 @@ public class HomeViewModel extends ViewModel {
 
     private final MutableLiveData<String> mTimerTextSeconds;
 
+    private final MutableLiveData<Boolean> mShowingPlantResult;
+
     private boolean timerEnabled;
 
     public HomeViewModel() {
@@ -19,6 +21,7 @@ public class HomeViewModel extends ViewModel {
 
         mTimerText = mHomeRepository.getTimerText();
         mTimerTextSeconds = mHomeRepository.getTimerTextSeconds();
+        mShowingPlantResult = mHomeRepository.getShowingPlantResult();
         timerEnabled = false;
     }
 
@@ -39,8 +42,8 @@ public class HomeViewModel extends ViewModel {
         timerEnabled = true;
     }
 
-    public void stopTimer(){
-        mHomeRepository.stopTimer();
+    public void stopTimer(String seeds_minutes){
+        mHomeRepository.stopTimer(seeds_minutes);
         timerEnabled = false;
     }
 
@@ -61,5 +64,13 @@ public class HomeViewModel extends ViewModel {
 
     public void setTimerEnabled(boolean timerEnabled) {
         this.timerEnabled = timerEnabled;
+    }
+
+    public MutableLiveData<Boolean> getShowingPlantResult(){
+        return mShowingPlantResult;
+    }
+
+    public boolean isShowingPlantResult(){
+        return mShowingPlantResult.getValue();
     }
 }

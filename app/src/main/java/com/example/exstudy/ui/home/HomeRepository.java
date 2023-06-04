@@ -10,10 +10,13 @@ import java.text.NumberFormat;
 public class HomeRepository {
     private final MutableLiveData<String> mTimerText;
     private final MutableLiveData<String> mTimerTextSeconds;
+    private final MutableLiveData<Boolean> mShowingPlantResult;
     private CountDownTimer timer;
+
     public HomeRepository(){
         mTimerText = HomeDataSource.createTimerTextData();
         mTimerTextSeconds = HomeDataSource.createTimerTextSecondsData();
+        mShowingPlantResult = HomeDataSource.createShowingPlantResult();
     }
 
     public MutableLiveData<String> getTimerText() {
@@ -28,9 +31,13 @@ public class HomeRepository {
         timer = HomeDataSource.createTimer(duration).start();
     }
 
-    public void stopTimer(){
-        mTimerText.setValue(HomeDataSource.DEFAULT_MINUTES);
+    public void stopTimer(String seeds_minutes){
+        mTimerText.setValue(seeds_minutes);
         mTimerTextSeconds.setValue(HomeDataSource.DEFAULT_SECONDS);
         timer.cancel();
+    }
+
+    public MutableLiveData<Boolean> getShowingPlantResult(){
+        return mShowingPlantResult;
     }
 }
