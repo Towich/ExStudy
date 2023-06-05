@@ -1,13 +1,10 @@
 package com.example.exstudy.ui.home;
 
-import static com.example.exstudy.ui.home.HomeDataSource.DEFAULT_MINUTES;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -21,10 +18,8 @@ import androidx.navigation.Navigation;
 
 import com.example.exstudy.R;
 import com.example.exstudy.databinding.FragmentHomeBinding;
-import com.example.exstudy.ui.inventory.InventoryDataSource;
+import com.example.exstudy.ui.inventory.InventorySeedsDataSource;
 import com.example.exstudy.ui.settings.SettingsFragment;
-
-import org.w3c.dom.Text;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -94,7 +89,7 @@ public class HomeFragment extends Fragment {
         homeViewModel.getShowingPlantResult().observe(getViewLifecycleOwner(), mShowingPlantResult -> {
 
             // TODO
-            // Showing EndTimerDialogue
+            seeds_image.setImageResource(R.drawable.lemon);
             Log.i("HOME", "yes, changing.");
         });
 
@@ -139,7 +134,7 @@ public class HomeFragment extends Fragment {
             else{
                 homeViewModel.stopTimer(seeds_minutes);
                 buttonStartTimer.setImageResource(R.drawable.baseline_play_arrow_24);
-                progressBar.setMax(Integer.parseInt(DEFAULT_MINUTES));
+                progressBar.setMax(Integer.parseInt(seeds_minutes));
             }
         });
 
@@ -167,10 +162,10 @@ public class HomeFragment extends Fragment {
 
         Bundle seeds_bundle = getArguments();
         if(seeds_bundle != null){
-            String mSeedsName = seeds_bundle.getString(InventoryDataSource.KEY_SEEDS_NAME);
-            String mSeedsTimeToGrow = seeds_bundle.getString(InventoryDataSource.KEY_SEEDS_TIME_TO_GROW);
+            String mSeedsName = seeds_bundle.getString(InventorySeedsDataSource.KEY_SEEDS_NAME);
+            String mSeedsTimeToGrow = seeds_bundle.getString(InventorySeedsDataSource.KEY_SEEDS_TIME_TO_GROW);
             seeds_minutes = mSeedsTimeToGrow;
-            int mSeedsImage = seeds_bundle.getInt(InventoryDataSource.KEY_SEEDS_IMAGE);
+            int mSeedsImage = seeds_bundle.getInt(InventorySeedsDataSource.KEY_SEEDS_IMAGE);
 
             Log.i("HOME", mSeedsName + " : " + mSeedsTimeToGrow + " : " + mSeedsImage);
 

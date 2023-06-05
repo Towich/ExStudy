@@ -44,24 +44,38 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/seed_item_time_to_grow"
+                android:id="@+id/seed_item_rarity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Time to grow: 30'"
+                android:layout_marginStart="4dp"
+                android:text="Common"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/seed_item_image"
                 app:layout_constraintTop_toBottomOf="@+id/seed_item_name" />
 
             <TextView
+                android:id="@+id/seed_item_time_to_grow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:text="30'"
+                android:textSize="30sp"
+                android:textColor="@color/wood_500"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/seed_item_quantity"
+                app:layout_constraintVertical_bias="0.6" />
+
+            <TextView
                 android:id="@+id/seed_item_quantity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1"
-                android:textSize="40sp"
-                android:textColor="@color/blue_500"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp"
+                android:text="1"
+                android:textColor="@color/blue_500"
+                android:textSize="40sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

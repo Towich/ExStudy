@@ -6,16 +6,15 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@drawable/logo"
+        android:icon="@drawable/coconut_cut"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/logo"
+        android:roundIcon="@drawable/coconut_cut"
         android:supportsRtl="true"
         android:theme="@style/Theme.ExStudy"
         tools:targetApi="31">
         <activity
             android:name=".MainActivity"
-            android:exported="true"
-            android:label="@string/app_name">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

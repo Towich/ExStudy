@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ExStudy</string>
+    <string name="app_name">GrowStudy</string>
     <string name="title_home">Home</string>
     <string name="title_timer">Концентрация</string>
     <string name="title_notifications">Notifications</string>

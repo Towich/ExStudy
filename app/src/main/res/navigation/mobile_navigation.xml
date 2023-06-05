@@ -29,7 +29,7 @@
         tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/inventoryFragment"
-        android:name="com.example.exstudy.ui.inventory.InventoryFragment"
+        android:name="com.example.exstudy.ui.inventory.InventorySeedsFragment"
         android:label="fragment_inventory"
         tools:layout="@layout/fragment_inventory" />
 </navigation>

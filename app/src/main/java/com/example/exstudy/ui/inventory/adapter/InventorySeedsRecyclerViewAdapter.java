@@ -15,9 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.exstudy.R;
 import com.example.exstudy.data.model.SeedModel;
-import com.example.exstudy.ui.inventory.InventoryDataSource;
+import com.example.exstudy.ui.inventory.InventorySeedsDataSource;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class InventorySeedsRecyclerViewAdapter extends RecyclerView.Adapter<InventorySeedsRecyclerViewAdapter.MyViewHolder> {
@@ -84,9 +83,9 @@ public class InventorySeedsRecyclerViewAdapter extends RecyclerView.Adapter<Inve
                 Log.i(seeds_name, seeds_time_to_grow);
 
                 Bundle bundle = new Bundle();
-                bundle.putString(InventoryDataSource.KEY_SEEDS_NAME, seeds_name);
-                bundle.putString(InventoryDataSource.KEY_SEEDS_TIME_TO_GROW, seeds_time_to_grow);
-                bundle.putInt(InventoryDataSource.KEY_SEEDS_IMAGE, seeds_image);
+                bundle.putString(InventorySeedsDataSource.KEY_SEEDS_NAME, seeds_name);
+                bundle.putString(InventorySeedsDataSource.KEY_SEEDS_TIME_TO_GROW, seeds_time_to_grow);
+                bundle.putInt(InventorySeedsDataSource.KEY_SEEDS_IMAGE, seeds_image);
 
                 Navigation.findNavController(view).navigate(R.id.navigation_home, bundle);
             });

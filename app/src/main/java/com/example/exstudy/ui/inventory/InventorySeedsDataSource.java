@@ -8,7 +8,7 @@ import com.example.exstudy.data.model.SeedModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InventoryDataSource {
+public class InventorySeedsDataSource {
 
     public static final String KEY_SEEDS_NAME = "KEY_SEEDS_NAME";
     public static final String KEY_SEEDS_TIME_TO_GROW = "KEY_SEEDS_TIME_TO_GROW";
@@ -21,7 +21,7 @@ public class InventoryDataSource {
 
         List<SeedModel> seedModels = new ArrayList<>();
 
-        SeedModel lemonModel = new SeedModel("Lemon", R.drawable.seeds_lemon, 30, 1);
+        SeedModel lemonModel = new SeedModel("Lemon", R.drawable.seeds_lemon, 1, 1);
         SeedModel coconutModel = new SeedModel("Coconut", R.drawable.seeds_coconut, 45, 2);
         seedModels.add(lemonModel);
         seedModels.add(coconutModel);

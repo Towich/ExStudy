@@ -15,13 +15,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.exstudy.R;
+import com.example.exstudy.data.room.SeedEntity;
 import com.example.exstudy.databinding.FragmentInventoryBinding;
 import com.example.exstudy.ui.inventory.adapter.InventorySeedsRecyclerViewAdapter;
 
-public class InventoryFragment extends Fragment {
+public class InventorySeedsFragment extends Fragment {
 
     FragmentInventoryBinding binding;
-    private InventoryViewModel mViewModel;
+    private InventorySeedsViewModel mViewModel;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -36,12 +37,20 @@ public class InventoryFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mViewModel = new ViewModelProvider(this).get(InventoryViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(InventorySeedsViewModel.class);
+
+        //mViewModel.insertSeed(new SeedEntity("Lemon", R.drawable.seeds_lemon, 30, 2));
 
         RecyclerView recyclerView = binding.inventoryRecyclerView;
-        InventorySeedsRecyclerViewAdapter adapter = new InventorySeedsRecyclerViewAdapter(getContext(), mViewModel.getInventorySeeds());
 
-        recyclerView.setAdapter(adapter);
+        // Update InventorySeeds
+        mViewModel.getInventorySeeds().observe(getViewLifecycleOwner(), inventorySeeds -> {
+            InventorySeedsRecyclerViewAdapter adapter = new InventorySeedsRecyclerViewAdapter(getContext(), mViewModel.getSeeds());
+            recyclerView.setAdapter(adapter);
+        });
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+
     }
 }
