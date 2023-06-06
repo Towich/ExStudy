@@ -31,7 +31,7 @@ public interface SeedFruitDao {
     LiveData<SeedEntity> getSeedByName(String seedName);
 
     @Query("SELECT * FROM all_fruits_table WHERE name=:fruitName")
-    LiveData<FruitEntity> getFruitByName(String fruitName);
+    FruitEntity getFruitByName(String fruitName);
 
     @Query("UPDATE all_fruits_table SET quantity=quantity+:delta WHERE name=:fruitName")
     void increaseFruitQuantity(String fruitName, int delta);
