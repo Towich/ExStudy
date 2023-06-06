@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.ExStudy" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/blue_500</item>
-        <item name="colorPrimaryVariant">@color/black_200</item>
+        <item name="colorPrimary">@color/green_100</item>
+        <item name="colorPrimaryVariant">@color/purple_800</item>
         <item name="colorOnPrimary">@color/blue_200</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -12,7 +12,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-        <item name="android:background">@color/black_200</item>
-        <item name="android:textColor">@color/white_200</item>
+        <item name="android:background">@color/purple_800</item>
+        <item name="android:textColor">@color/orange_300</item>
     </style>
 </resources>

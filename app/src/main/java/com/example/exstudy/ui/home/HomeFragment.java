@@ -18,11 +18,7 @@ import androidx.navigation.Navigation;
 
 import com.example.exstudy.R;
 import com.example.exstudy.databinding.FragmentHomeBinding;
-import com.example.exstudy.ui.inventory.InventorySeedsDataSource;
-import com.example.exstudy.ui.settings.SettingsFragment;
-
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
+import com.example.exstudy.ui.inventory.seeds.InventorySeedsDataSource;
 
 public class HomeFragment extends Fragment {
 
@@ -55,7 +51,7 @@ public class HomeFragment extends Fragment {
         textViewTimer = binding.textHome;
         textViewTimerSeconds = binding.textHomeTimerSeconds;
         buttonStartTimer = binding.buttonHomeStartTimer;
-        buttonSettings = binding.buttonHomeSettings;
+        // buttonSettings = binding.buttonHomeSettings;
         progressBar = binding.progressBarHome;
 
         seeds_image = binding.seedsImage;
@@ -87,14 +83,15 @@ public class HomeFragment extends Fragment {
 
         // Subscribe End Timer
         homeViewModel.getShowingPlantResult().observe(getViewLifecycleOwner(), mShowingPlantResult -> {
-
             // TODO
             seeds_image.setImageResource(R.drawable.lemon);
+            seeds_name.setText("Ready to collect!");
+            homeViewModel.setReadyToCollect(true);
             Log.i("HOME", "yes, changing.");
         });
 
         ConnectButtons();
-        GetBundleSettings();
+        //GetBundleSettings();
 
         return root;
     }
@@ -135,28 +132,38 @@ public class HomeFragment extends Fragment {
                 homeViewModel.stopTimer(seeds_minutes);
                 buttonStartTimer.setImageResource(R.drawable.baseline_play_arrow_24);
                 progressBar.setMax(Integer.parseInt(seeds_minutes));
+
+                // If the fruit has grown
+                if(homeViewModel.isReadyToCollect()){
+                    seeds_name.setText("Empty");
+                    seeds_image.setImageResource(R.drawable.baseline_touch_app_24);
+                    homeViewModel.collectPlant();
+                    return;
+                }
             }
         });
 
-        // Settings
-        buttonSettings.setOnClickListener(view ->
-                Navigation.findNavController(view).navigate(R.id.settingsFragment)
-        );
+//        Settings
+//        buttonSettings.setOnClickListener(view ->
+//                Navigation.findNavController(view).navigate(R.id.settingsFragment)
+//        );
     }
-    private void GetBundleSettings(){
-        getParentFragmentManager().setFragmentResultListener(SettingsFragment.RESULT_SETTINGS_FRAGMENT,
-                this, (requestKey, result) -> {
-                    final NumberFormat f = new DecimalFormat("00");
 
-                    String minutes = result.getString(SettingsFragment.MINUTES_KEY);
-                    String seconds = result.getString(SettingsFragment.SECONDS_KEY);
-
-                    homeViewModel.setTimerMinutes(f.format(Integer.parseInt(minutes)));
-                    homeViewModel.setTimerSeconds(f.format(Integer.parseInt(seconds)));
-
-                    progressBar.setMax(Integer.parseInt(minutes) * 60 + Integer.parseInt(seconds));
-                });
-    }
+//    TO REMOVE
+//    private void GetBundleSettings(){
+//        getParentFragmentManager().setFragmentResultListener(SettingsFragment.RESULT_SETTINGS_FRAGMENT,
+//                this, (requestKey, result) -> {
+//                    final NumberFormat f = new DecimalFormat("00");
+//
+//                    String minutes = result.getString(SettingsFragment.MINUTES_KEY);
+//                    String seconds = result.getString(SettingsFragment.SECONDS_KEY);
+//
+//                    homeViewModel.setTimerMinutes(f.format(Integer.parseInt(minutes)));
+//                    homeViewModel.setTimerSeconds(f.format(Integer.parseInt(seconds)));
+//
+//                    progressBar.setMax(Integer.parseInt(minutes) * 60 + Integer.parseInt(seconds));
+//                });
+//    }
 
     private void GetBundleFromSeedsInventory(){
 
@@ -172,7 +179,8 @@ public class HomeFragment extends Fragment {
             seeds_name.setText(mSeedsName);
             homeViewModel.setTimerMinutes(mSeedsTimeToGrow);
             seeds_image.setImageResource(mSeedsImage);
-        }
 
+            homeViewModel.setNameChosenSeeds(mSeedsName);
+        }
     }
 }

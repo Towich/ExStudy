@@ -1,4 +1,4 @@
-package com.example.exstudy.ui.inventory;
+package com.example.exstudy.ui.inventory.seeds;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -14,10 +14,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.exstudy.R;
-import com.example.exstudy.data.room.SeedEntity;
 import com.example.exstudy.databinding.FragmentInventoryBinding;
-import com.example.exstudy.ui.inventory.adapter.InventorySeedsRecyclerViewAdapter;
+import com.example.exstudy.ui.inventory.seeds.adapter.InventorySeedsRecyclerViewAdapter;
 
 public class InventorySeedsFragment extends Fragment {
 
@@ -47,10 +45,7 @@ public class InventorySeedsFragment extends Fragment {
         mViewModel.getInventorySeeds().observe(getViewLifecycleOwner(), inventorySeeds -> {
             InventorySeedsRecyclerViewAdapter adapter = new InventorySeedsRecyclerViewAdapter(getContext(), mViewModel.getSeeds());
             recyclerView.setAdapter(adapter);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         });
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-
     }
 }

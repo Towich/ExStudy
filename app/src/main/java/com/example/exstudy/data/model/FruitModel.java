@@ -1,15 +1,17 @@
 package com.example.exstudy.data.model;
 
+import com.example.exstudy.data.room.FruitEntity;
+
 public class FruitModel {
     private String name;
     private int image;
-    private int timeToGrow;
+    private int defPrice;
     private int quantity;
 
-    public FruitModel(String name, int image, int timeToGrow, int quantity) {
+    public FruitModel(String name, int image, int defPrice, int quantity) {
         this.name = name;
         this.image = image;
-        this.timeToGrow = timeToGrow;
+        this.defPrice = defPrice;
         this.quantity = quantity;
     }
 
@@ -29,12 +31,12 @@ public class FruitModel {
         this.image = image;
     }
 
-    public int getTimeToGrow() {
-        return timeToGrow;
+    public int getDefPrice() {
+        return defPrice;
     }
 
-    public void setTimeToGrow(int timeToGrow) {
-        this.timeToGrow = timeToGrow;
+    public void setDefPrice(int defPrice) {
+        this.defPrice = defPrice;
     }
 
     public int getQuantity() {
@@ -43,5 +45,9 @@ public class FruitModel {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public FruitEntity toEntity(){
+        return new FruitEntity(name, image, defPrice, quantity);
     }
 }

@@ -44,7 +44,7 @@ public abstract class SeedFruitDatabase extends RoomDatabase {
             super.onCreate(db);
             databaseWriteExecutor.execute(() -> {
                 SeedFruitDao dao = INSTANCE.seedFruitDao();
-                dao.deleteAll();
+                dao.deleteAllSeeds();
                 dao.insertSeed(new SeedEntity("Lemon", R.drawable.seeds_lemon, 30, 1));
                 dao.insertSeed(new SeedEntity("Coconut", R.drawable.seeds_coconut, 45, 5));
             });

@@ -15,4 +15,16 @@
     <color name="blue_200">#4ba2e6</color>
     <color name="white_200">#e2e2e6</color>
     <color name="black_200">#211e24</color>
+
+    <color name="white_100">#f7f7f9</color>
+    <color name="green_100">#00c474</color>
+    <color name="orange_400">#ffcb5f</color>
+
+    <color name="blue_100">#faebd7</color>
+
+    <!-- Color scheme #1 -->
+    <color name="purple_900">#312c51</color>
+    <color name="purple_800">#48426d</color>
+    <color name="orange_300">#f0c38e</color>
+    <color name="teal_100">#f1aa9b</color>
 </resources>

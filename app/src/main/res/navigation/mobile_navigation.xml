@@ -14,7 +14,7 @@
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="com.example.exstudy.ui.timer.TimerFragment"
-        android:label="@string/title_timer"
+        android:label="@string/title_fruits_inventory"
         tools:layout="@layout/fragment_timer" />
 
     <fragment
@@ -29,7 +29,12 @@
         tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/inventoryFragment"
-        android:name="com.example.exstudy.ui.inventory.InventorySeedsFragment"
+        android:name="com.example.exstudy.ui.inventory.seeds.InventorySeedsFragment"
         android:label="fragment_inventory"
         tools:layout="@layout/fragment_inventory" />
+    <fragment
+        android:id="@+id/inventoryFruitsFragment"
+        android:name="com.example.exstudy.ui.inventory.fruits.InventoryFruitsFragment"
+        android:label="fragment_inventory_fruits"
+        tools:layout="@layout/fragment_inventory_fruits" />
 </navigation>

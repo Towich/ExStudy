@@ -2,6 +2,7 @@ package com.example.exstudy.data.model;
 
 public class SeedModel {
 
+    private int id;
     private String name;
     private int image;
     private int timeToGrow;
@@ -28,5 +29,13 @@ public class SeedModel {
 
     public int getQuantity() {
         return quantity;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

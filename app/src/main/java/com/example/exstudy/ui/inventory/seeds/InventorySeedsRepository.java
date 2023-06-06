@@ -1,4 +1,4 @@
-package com.example.exstudy.ui.inventory;
+package com.example.exstudy.ui.inventory.seeds;
 
 import android.app.Application;
 import android.os.Build;
@@ -34,8 +34,9 @@ public class InventorySeedsRepository {
         inventory_seeds = Transformations.map(mDao.getAllMySeeds(), entities -> entities.stream()
                 .map(SeedEntity::toModel).collect(Collectors.toList()));
 
-        insertSeed(new SeedEntity("Lemon", R.drawable.seeds_lemon, 30, 1));
-        insertSeed(new SeedEntity("Coconut", R.drawable.seeds_coconut, 45, 5));
+//        resetSeeds();
+//        insertSeed(new SeedEntity("Lemon", R.drawable.seeds_lemon, 1, 2));
+//        insertSeed(new SeedEntity("Coconut", R.drawable.seeds_coconut, 45, 5));
     }
 
     public LiveData<List<SeedModel>> getInventorySeeds() {
@@ -45,6 +46,12 @@ public class InventorySeedsRepository {
     public void insertSeed(SeedEntity seedEntity){
         SeedFruitDatabase.databaseWriteExecutor.execute(() -> {
             mDao.insertSeed(seedEntity);
+        });
+    }
+
+    private void resetSeeds(){
+        SeedFruitDatabase.databaseWriteExecutor.execute(() -> {
+            mDao.deleteAllSeeds();
         });
     }
 }

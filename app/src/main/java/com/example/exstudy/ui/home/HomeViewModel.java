@@ -1,10 +1,16 @@
 package com.example.exstudy.ui.home;
 
+import android.app.Application;
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
-public class HomeViewModel extends ViewModel {
+import com.example.exstudy.data.model.FruitModel;
+
+public class HomeViewModel extends AndroidViewModel {
 
     private final HomeRepository mHomeRepository;
 
@@ -13,16 +19,20 @@ public class HomeViewModel extends ViewModel {
     private final MutableLiveData<String> mTimerTextSeconds;
 
     private final MutableLiveData<Boolean> mShowingPlantResult;
-
     private boolean timerEnabled;
+    private boolean readyToCollect;
+    private String nameChosenSeeds;
 
-    public HomeViewModel() {
-        mHomeRepository = new HomeRepository();
+    public HomeViewModel(@NonNull Application application) {
+        super(application);
+        mHomeRepository = new HomeRepository(application);
 
         mTimerText = mHomeRepository.getTimerText();
         mTimerTextSeconds = mHomeRepository.getTimerTextSeconds();
         mShowingPlantResult = mHomeRepository.getShowingPlantResult();
+
         timerEnabled = false;
+        readyToCollect = false;
     }
 
     public LiveData<String> getText() {
@@ -72,5 +82,29 @@ public class HomeViewModel extends ViewModel {
 
     public boolean isShowingPlantResult(){
         return mShowingPlantResult.getValue();
+    }
+
+    public boolean isReadyToCollect() {
+        return readyToCollect;
+    }
+
+    public void setReadyToCollect(boolean readyToCollect) {
+        this.readyToCollect = readyToCollect;
+    }
+
+    public String getNameOfChosenSeeds() {
+        return nameChosenSeeds;
+    }
+
+    public void setNameChosenSeeds(String seeds_name) {
+        this.nameChosenSeeds = seeds_name;
+    }
+
+    public void getCurrentFruitInDatabase(){
+        mHomeRepository.getFruitInDatabase(nameChosenSeeds);
+    }
+
+    public void collectPlant(){
+        mHomeRepository.collectFruit(nameChosenSeeds, true);
     }
 }

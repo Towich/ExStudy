@@ -1,11 +1,17 @@
 package com.example.exstudy.ui.home;
 
+import android.app.Application;
 import android.os.CountDownTimer;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Transformations;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
+import com.example.exstudy.data.model.FruitModel;
+import com.example.exstudy.data.room.FruitEntity;
+import com.example.exstudy.data.room.SeedFruitDao;
+import com.example.exstudy.data.room.SeedFruitDatabase;
+import com.example.exstudy.ui.inventory.seeds.InventorySeedsDataSource;
 
 public class HomeRepository {
     private final MutableLiveData<String> mTimerText;
@@ -13,10 +19,15 @@ public class HomeRepository {
     private final MutableLiveData<Boolean> mShowingPlantResult;
     private CountDownTimer timer;
 
-    public HomeRepository(){
+    private SeedFruitDao mDao;
+
+    public HomeRepository(Application application){
         mTimerText = HomeDataSource.createTimerTextData();
         mTimerTextSeconds = HomeDataSource.createTimerTextSecondsData();
         mShowingPlantResult = HomeDataSource.createShowingPlantResult();
+
+        SeedFruitDatabase db = SeedFruitDatabase.getDatabase(application);
+        mDao = db.seedFruitDao();
     }
 
     public MutableLiveData<String> getTimerText() {
@@ -39,5 +50,29 @@ public class HomeRepository {
 
     public MutableLiveData<Boolean> getShowingPlantResult(){
         return mShowingPlantResult;
+    }
+
+    public void getFruitInDatabase(String seedsName){
+        SeedFruitDatabase.databaseWriteExecutor.execute(() -> {
+            FruitModel fruitModel = InventorySeedsDataSource.getFruitByName(seedsName);
+
+
+//            FruitEntity fruitEntity = mDao.getFruitByName(seedsName).getValue();
+//            if(fruitEntity == null)
+//                mDao.insertFruit(fruitModel.toEntity());
+        });
+    }
+
+    public void collectFruit(String nameChosenSeeds, boolean fruitInInventory){
+        SeedFruitDatabase.databaseWriteExecutor.execute(() -> {
+            FruitModel fruitModel = InventorySeedsDataSource.getFruitByName(nameChosenSeeds);
+
+            if(fruitInInventory){
+                mDao.increaseFruitQuantity(nameChosenSeeds, 1);
+            }
+            else{
+                mDao.insertFruit(fruitModel.toEntity());
+            }
+        });
     }
 }

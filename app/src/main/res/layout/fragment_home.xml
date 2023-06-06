@@ -31,7 +31,6 @@
         android:background="#00000000"
         android:text="59'"
         android:textAlignment="center"
-        android:textColor="@color/white_200"
         android:textSize="90sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.37"
@@ -47,7 +46,6 @@
         android:background="#00000000"
         android:text="59''"
         android:textAlignment="center"
-        android:textColor="@color/white_200"
         android:textSize="50sp"
         app:layout_constraintStart_toEndOf="@+id/text_home"
         app:layout_constraintTop_toBottomOf="@+id/progress_bar_home" />
@@ -64,22 +62,22 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageButton
-        android:id="@+id/button_home_settings"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/button_states"
-        android:src="@drawable/baseline_settings_24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button_home_start_timer"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent" />
+<!--    <ImageButton-->
+<!--        android:id="@+id/button_home_settings"-->
+<!--        android:layout_width="70dp"-->
+<!--        android:layout_height="70dp"-->
+<!--        android:layout_marginBottom="16dp"-->
+<!--        android:background="@drawable/button_states"-->
+<!--        android:src="@drawable/baseline_settings_24"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toStartOf="@+id/button_home_start_timer"-->
+<!--        app:layout_constraintHorizontal_bias="1.0"-->
+<!--        app:layout_constraintStart_toStartOf="parent" />-->
 
     <ImageView
         android:id="@+id/seeds_image"
-        android:layout_width="170dp"
-        android:layout_height="170dp"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
         android:background="#00000000"
         android:src="@drawable/seeds_lemon"
         app:layout_constraintBottom_toBottomOf="@+id/progress_bar_home"
@@ -94,7 +92,6 @@
         android:background="#00000000"
         android:text="Lemon"
         android:textSize="20sp"
-        android:layout_marginTop="-16dp"
         app:layout_constraintEnd_toEndOf="@+id/seeds_image"
         app:layout_constraintHorizontal_bias="0.47"
         app:layout_constraintStart_toStartOf="@+id/seeds_image"

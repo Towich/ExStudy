@@ -1,12 +1,10 @@
-package com.example.exstudy.ui.inventory;
+package com.example.exstudy.ui.inventory.seeds;
 
 import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import com.example.exstudy.data.model.SeedModel;
 import com.example.exstudy.data.room.SeedEntity;

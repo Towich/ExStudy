@@ -1,4 +1,4 @@
-package com.example.exstudy.ui.inventory.adapter;
+package com.example.exstudy.ui.inventory.seeds.adapter;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.exstudy.R;
 import com.example.exstudy.data.model.SeedModel;
-import com.example.exstudy.ui.inventory.InventorySeedsDataSource;
+import com.example.exstudy.ui.inventory.seeds.InventorySeedsDataSource;
 
 import java.util.List;
 

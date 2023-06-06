@@ -57,4 +57,8 @@ public class HomeDataSource {
             }
         };
     }
+
+    public static void collectPlant(boolean fruitInInventory){
+
+    }
 }
