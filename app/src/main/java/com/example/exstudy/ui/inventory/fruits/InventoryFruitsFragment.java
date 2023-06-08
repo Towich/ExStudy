@@ -15,9 +15,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.exstudy.R;
+import com.example.exstudy.data.model.FruitModel;
 import com.example.exstudy.databinding.FragmentInventoryFruitsBinding;
 
-public class InventoryFruitsFragment extends Fragment {
+public class InventoryFruitsFragment extends Fragment implements SelectListener {
 
     FragmentInventoryFruitsBinding binding;
     private InventoryFruitsViewModel mViewModel;
@@ -40,9 +41,15 @@ public class InventoryFruitsFragment extends Fragment {
         RecyclerView recyclerView = binding.inventoryFruitsRecyclerView;
 
         mViewModel.getInventory_fruits().observe(getViewLifecycleOwner(), fruitModels -> {
-            InventoryFruitsRecyclerViewAdapter adapter = new InventoryFruitsRecyclerViewAdapter(getContext(), mViewModel.getListMyFruits());
+            InventoryFruitsRecyclerViewAdapter adapter = new InventoryFruitsRecyclerViewAdapter(getContext(), mViewModel.getListMyFruits(), this);
             recyclerView.setAdapter(adapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         });
+    }
+
+    @Override
+    public void onItemClicked(FruitModel fruitModel) {
+        mViewModel.increaseMoney(fruitModel.getDefPrice());
+        mViewModel.changeQuantityOfFruit(fruitModel, -1);
     }
 }

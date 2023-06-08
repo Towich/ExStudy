@@ -36,4 +36,12 @@ public class InventoryFruitsViewModel extends AndroidViewModel {
     public void insertFruit(FruitModel fruitEntity){
         mRepository.insertFruit(fruitEntity);
     }
+
+    public void increaseMoney(int delta){
+        mRepository.increaseMoney(delta);
+    }
+
+    public void changeQuantityOfFruit(FruitModel fruitModel, int delta){
+        mRepository.changeQuantityOfFruit(fruitModel, delta);
+    }
 }

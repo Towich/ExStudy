@@ -33,6 +33,8 @@ public class HomeViewModel extends AndroidViewModel {
 
         timerEnabled = false;
         readyToCollect = false;
+
+        initSharedPreferences();
     }
 
     public LiveData<String> getText() {
@@ -76,6 +78,10 @@ public class HomeViewModel extends AndroidViewModel {
         this.timerEnabled = timerEnabled;
     }
 
+    public void setShowingPlantResult(boolean newState){
+        mShowingPlantResult.setValue(newState);
+    }
+
     public MutableLiveData<Boolean> getShowingPlantResult(){
         return mShowingPlantResult;
     }
@@ -105,6 +111,23 @@ public class HomeViewModel extends AndroidViewModel {
     }
 
     public void collectPlant(){
-        mHomeRepository.collectFruit(nameChosenSeeds, true);
+        mHomeRepository.collectFruit(nameChosenSeeds);
     }
+
+    private void initSharedPreferences(){
+        mHomeRepository.initSharedPreferences();
+    }
+
+    public void saveMoney(int moneyToSave){
+        mHomeRepository.saveMoney(moneyToSave);
+    }
+
+    public void increaseMoney(int delta){
+        mHomeRepository.increaseMoney(delta);
+    }
+
+    public int getMoney(){
+        return mHomeRepository.getMoney();
+    }
+
 }

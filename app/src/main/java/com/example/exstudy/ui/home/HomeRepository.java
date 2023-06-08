@@ -1,6 +1,7 @@
 package com.example.exstudy.ui.home;
 
 import android.app.Application;
+import android.content.Context;
 import android.os.CountDownTimer;
 import android.util.Log;
 
@@ -19,6 +20,9 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 public class HomeRepository {
+
+    private Application application;
+
     private final MutableLiveData<String> mTimerText;
     private final MutableLiveData<String> mTimerTextSeconds;
     private final MutableLiveData<Boolean> mShowingPlantResult;
@@ -27,6 +31,8 @@ public class HomeRepository {
     private SeedFruitDao mDao;
 
     public HomeRepository(Application application){
+        this.application = application;
+
         mTimerText = HomeDataSource.createTimerTextData();
         mTimerTextSeconds = HomeDataSource.createTimerTextSecondsData();
         mShowingPlantResult = HomeDataSource.createShowingPlantResult();
@@ -60,20 +66,15 @@ public class HomeRepository {
     public void getFruitInDatabase(String seedsName){
         SeedFruitDatabase.databaseWriteExecutor.execute(() -> {
             FruitModel fruitModel = InventorySeedsDataSource.getFruitByName(seedsName);
-
-
-//            FruitEntity fruitEntity = mDao.getFruitByName(seedsName).getValue();
-//            if(fruitEntity == null)
-//                mDao.insertFruit(fruitModel.toEntity());
         });
     }
 
-    public void collectFruit(String nameChosenSeeds, boolean fruitInInventory){
+    public void collectFruit(String nameChosenSeeds){
         SeedFruitDatabase.databaseWriteExecutor.execute(() -> {
             FruitModel fruitModel = InventorySeedsDataSource.getFruitByName(nameChosenSeeds);
 
             Future future = SeedFruitDatabase.databaseWriteExecutor.submit(new Callable() {
-                public Object call() throws Exception{
+                public Object call() {
                     return mDao.getFruitByName(nameChosenSeeds);
                 }
             });
@@ -93,5 +94,21 @@ public class HomeRepository {
                 mDao.insertFruit(fruitModel.toEntity());
             }
         });
+    }
+
+    public void initSharedPreferences(){
+        HomeDataSource.initSharedPreferences(application.getApplicationContext());
+    }
+
+    public void saveMoney(int moneyToSave){
+        HomeDataSource.save(moneyToSave);
+    }
+
+    public void increaseMoney(int delta){
+        HomeDataSource.increaseMoney(delta);
+    }
+
+    public int getMoney(){
+        return HomeDataSource.loadMoney();
     }
 }

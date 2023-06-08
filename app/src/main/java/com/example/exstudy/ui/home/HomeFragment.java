@@ -22,16 +22,13 @@ import com.example.exstudy.ui.inventory.seeds.InventorySeedsDataSource;
 
 public class HomeFragment extends Fragment {
 
-    HomeViewModel homeViewModel;
+    private HomeViewModel homeViewModel;
     private FragmentHomeBinding binding;
 
-    private TextView textViewTimer;
-    private TextView textViewTimerSeconds;
-    private ImageButton buttonStartTimer;
-    private ImageButton buttonSettings;
+    private TextView textViewTimer, textViewTimerSeconds, seeds_name, textViewMoney;
+    private ImageButton buttonStartTimer, buttonSettings;
     private ProgressBar progressBar;
     private ImageView seeds_image;
-    private TextView seeds_name;
     private String seeds_minutes;
 
     @Override
@@ -48,52 +45,29 @@ public class HomeFragment extends Fragment {
         View root = binding.getRoot();
 
         // Initialize
+        Initialize();
+
+        GetBundleFromSeedsInventory();
+
+        SubscribeTimer();
+
+        ConnectButtons();
+
+        return root;
+    }
+
+    private void Initialize(){
+        textViewMoney = binding.homeTextViewBalance;
+        textViewMoney.setText(Integer.toString(homeViewModel.getMoney()));
+
         textViewTimer = binding.textHome;
         textViewTimerSeconds = binding.textHomeTimerSeconds;
         buttonStartTimer = binding.buttonHomeStartTimer;
-        // buttonSettings = binding.buttonHomeSettings;
         progressBar = binding.progressBarHome;
 
         seeds_image = binding.seedsImage;
         seeds_name = binding.seedsName;
         seeds_minutes = "30";
-
-        GetBundleFromSeedsInventory();
-
-        // Subscribe Timer: minutes
-        homeViewModel.getText().observe(getViewLifecycleOwner(), mTimerText -> {
-            String current_minutes = homeViewModel.getTimerString() + "'";
-            textViewTimer.setText(current_minutes);
-        });
-
-        // Subscribe Timer: seconds
-        homeViewModel.getTimerTextSeconds().observe(getViewLifecycleOwner(), mTimerTextSeconds -> {
-
-            String current_minutes = homeViewModel.getTimerString();
-            String current_seconds = homeViewModel.getTimerSecondsString();
-
-            int current_minutes_int = Integer.parseInt(current_minutes);
-            int current_seconds_int = Integer.parseInt(current_seconds);
-
-            progressBar.setProgress(current_minutes_int * 60 + current_seconds_int);
-
-            current_seconds += "''";
-            textViewTimerSeconds.setText(current_seconds);
-        });
-
-        // Subscribe End Timer
-        homeViewModel.getShowingPlantResult().observe(getViewLifecycleOwner(), mShowingPlantResult -> {
-            // TODO
-            seeds_image.setImageResource(R.drawable.lemon);
-            seeds_name.setText("Ready to collect!");
-            homeViewModel.setReadyToCollect(true);
-            Log.i("HOME", "yes, changing.");
-        });
-
-        ConnectButtons();
-        //GetBundleSettings();
-
-        return root;
     }
 
     @Override
@@ -149,22 +123,6 @@ public class HomeFragment extends Fragment {
 //        );
     }
 
-//    TO REMOVE
-//    private void GetBundleSettings(){
-//        getParentFragmentManager().setFragmentResultListener(SettingsFragment.RESULT_SETTINGS_FRAGMENT,
-//                this, (requestKey, result) -> {
-//                    final NumberFormat f = new DecimalFormat("00");
-//
-//                    String minutes = result.getString(SettingsFragment.MINUTES_KEY);
-//                    String seconds = result.getString(SettingsFragment.SECONDS_KEY);
-//
-//                    homeViewModel.setTimerMinutes(f.format(Integer.parseInt(minutes)));
-//                    homeViewModel.setTimerSeconds(f.format(Integer.parseInt(seconds)));
-//
-//                    progressBar.setMax(Integer.parseInt(minutes) * 60 + Integer.parseInt(seconds));
-//                });
-//    }
-
     private void GetBundleFromSeedsInventory(){
 
         Bundle seeds_bundle = getArguments();
@@ -181,6 +139,42 @@ public class HomeFragment extends Fragment {
             seeds_image.setImageResource(mSeedsImage);
 
             homeViewModel.setNameChosenSeeds(mSeedsName);
+
         }
+    }
+
+    private void SubscribeTimer(){
+        // Subscribe Timer: minutes
+        homeViewModel.getText().observe(getViewLifecycleOwner(), mTimerText -> {
+            String current_minutes = homeViewModel.getTimerString() + "'";
+            textViewTimer.setText(current_minutes);
+        });
+
+        // Subscribe Timer: seconds
+        homeViewModel.getTimerTextSeconds().observe(getViewLifecycleOwner(), mTimerTextSeconds -> {
+
+            String current_minutes = homeViewModel.getTimerString();
+            String current_seconds = homeViewModel.getTimerSecondsString();
+
+            int current_minutes_int = Integer.parseInt(current_minutes);
+            int current_seconds_int = Integer.parseInt(current_seconds);
+
+            progressBar.setProgress(current_minutes_int * 60 + current_seconds_int);
+
+            current_seconds += "''";
+            textViewTimerSeconds.setText(current_seconds);
+        });
+
+        // Subscribe End Timer
+        homeViewModel.getShowingPlantResult().observe(getViewLifecycleOwner(), mShowingPlantResult -> {
+            // TODO
+            if(homeViewModel.getShowingPlantResult().getValue()) {
+                seeds_image.setImageResource(R.drawable.lemon);
+                seeds_name.setText("Ready to collect!");
+                homeViewModel.setReadyToCollect(true);
+                homeViewModel.setShowingPlantResult(false);
+                Log.i("HOME", "yes, changing.");
+            }
+        });
     }
 }

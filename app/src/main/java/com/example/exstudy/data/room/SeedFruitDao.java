@@ -36,4 +36,6 @@ public interface SeedFruitDao {
     @Query("UPDATE all_fruits_table SET quantity=quantity+:delta WHERE name=:fruitName")
     void increaseFruitQuantity(String fruitName, int delta);
 
+    @Query("DELETE FROM all_fruits_table WHERE quantity=0")
+    void removeEmptyFruits();
 }

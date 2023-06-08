@@ -7,95 +7,126 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
-
-    <ProgressBar
-        android:id="@+id/progress_bar_home"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_marginTop="16dp"
-        android:indeterminate="false"
-        android:max="30"
-        android:progress="30"
-        android:progressDrawable="@drawable/circle"
-        android:rotation="270"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/text_home"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#00000000"
-        android:text="59'"
-        android:textAlignment="center"
-        android:textSize="90sp"
+        <ImageView
+            android:id="@+id/home_image_balance_icon"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:paddingTop="5dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/money_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/home_text_view_balance"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="1000"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toStartOf="@+id/home_image_balance_icon"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.37"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progress_bar_home" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
-    <TextView
-        android:id="@+id/text_home_timer_seconds"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="10dp"
-        android:background="#00000000"
-        android:text="59''"
-        android:textAlignment="center"
-        android:textSize="50sp"
-        app:layout_constraintStart_toEndOf="@+id/text_home"
-        app:layout_constraintTop_toBottomOf="@+id/progress_bar_home" />
 
-    <ImageButton
-        android:id="@+id/button_home_start_timer"
-        android:layout_width="170dp"
-        android:layout_height="170dp"
-        android:layout_marginBottom="52dp"
-        android:background="@drawable/button_states"
-        android:src="@drawable/baseline_play_arrow_24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent" />
+        <ProgressBar
+            android:id="@+id/progress_bar_home"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_marginTop="16dp"
+            android:background="#00000000"
+            android:indeterminate="false"
+            android:max="30"
+            android:progress="30"
+            android:progressDrawable="@drawable/circle"
+            android:rotation="270"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-<!--    <ImageButton-->
-<!--        android:id="@+id/button_home_settings"-->
-<!--        android:layout_width="70dp"-->
-<!--        android:layout_height="70dp"-->
-<!--        android:layout_marginBottom="16dp"-->
-<!--        android:background="@drawable/button_states"-->
-<!--        android:src="@drawable/baseline_settings_24"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toStartOf="@+id/button_home_start_timer"-->
-<!--        app:layout_constraintHorizontal_bias="1.0"-->
-<!--        app:layout_constraintStart_toStartOf="parent" />-->
+        <TextView
+            android:id="@+id/text_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#00000000"
+            android:text="59'"
+            android:textAlignment="center"
+            android:textSize="90sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.37"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/progress_bar_home" />
 
-    <ImageView
-        android:id="@+id/seeds_image"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:background="#00000000"
-        android:src="@drawable/seeds_lemon"
-        app:layout_constraintBottom_toBottomOf="@+id/progress_bar_home"
-        app:layout_constraintEnd_toEndOf="@+id/progress_bar_home"
-        app:layout_constraintStart_toStartOf="@+id/progress_bar_home"
-        app:layout_constraintTop_toTopOf="@+id/progress_bar_home" />
+        <TextView
+            android:id="@+id/text_home_timer_seconds"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="10dp"
+            android:background="#00000000"
+            android:text="59''"
+            android:textAlignment="center"
+            android:textSize="50sp"
+            app:layout_constraintStart_toEndOf="@+id/text_home"
+            app:layout_constraintTop_toBottomOf="@+id/progress_bar_home" />
 
-    <TextView
-        android:id="@+id/seeds_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#00000000"
-        android:text="Lemon"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/seeds_image"
-        app:layout_constraintHorizontal_bias="0.47"
-        app:layout_constraintStart_toStartOf="@+id/seeds_image"
-        app:layout_constraintTop_toBottomOf="@+id/seeds_image" />
+        <ImageButton
+            android:id="@+id/button_home_start_timer"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:layout_marginBottom="52dp"
+            android:background="@drawable/button_states"
+            android:src="@drawable/baseline_play_arrow_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/progress_bar_home"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <ImageView
+            android:id="@+id/seeds_image"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:background="#00000000"
+            android:src="@drawable/seeds_lemon"
+            app:layout_constraintBottom_toBottomOf="@+id/progress_bar_home"
+            app:layout_constraintEnd_toEndOf="@+id/progress_bar_home"
+            app:layout_constraintStart_toStartOf="@+id/progress_bar_home"
+            app:layout_constraintTop_toTopOf="@+id/progress_bar_home" />
+
+        <TextView
+            android:id="@+id/seeds_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#00000000"
+            android:text="Lemon"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="@+id/seeds_image"
+            app:layout_constraintHorizontal_bias="0.47"
+            app:layout_constraintStart_toStartOf="@+id/seeds_image"
+            app:layout_constraintTop_toBottomOf="@+id/seeds_image" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

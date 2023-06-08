@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/blue_500"
+    android:background="@color/purple_900"
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
@@ -24,51 +24,49 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/seed_item_image"
+                android:id="@+id/fruit_item_image"
                 android:layout_width="130dp"
                 android:layout_height="130dp"
                 android:padding="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/seeds_coconut" />
+                app:srcCompat="@drawable/coconut_cut" />
 
             <TextView
-                android:id="@+id/seed_item_name"
+                android:id="@+id/fruit_item_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="Lemon"
                 android:textSize="40sp"
-                app:layout_constraintStart_toEndOf="@+id/seed_item_image"
+                app:layout_constraintStart_toEndOf="@+id/fruit_item_image"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/seed_item_rarity"
+                android:id="@+id/fruit_item_rarity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:text="Common"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/seed_item_image"
-                app:layout_constraintTop_toBottomOf="@+id/seed_item_name" />
+                app:layout_constraintStart_toEndOf="@+id/fruit_item_image"
+                app:layout_constraintTop_toBottomOf="@+id/fruit_item_name" />
 
-            <TextView
-                android:id="@+id/seed_item_time_to_grow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:text="30'"
-                android:textSize="30sp"
-                android:textColor="@color/wood_500"
+            <Button
+                android:id="@+id/fruit_item_button_sell"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="10dp"
+                android:text="Sell: 10$"
+                android:textSize="10sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/seed_item_quantity"
-                app:layout_constraintVertical_bias="0.6" />
+                app:layout_constraintEnd_toEndOf="parent" />
 
             <TextView
-                android:id="@+id/seed_item_quantity"
+                android:id="@+id/fruit_item_quantity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"

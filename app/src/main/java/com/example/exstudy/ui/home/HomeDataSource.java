@@ -1,5 +1,7 @@
 package com.example.exstudy.ui.home;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.CountDownTimer;
 import android.util.Log;
 
@@ -13,6 +15,12 @@ public class HomeDataSource {
     public static final String DEFAULT_MINUTES = "30";
     public static final String DEFAULT_SECONDS = "00";
     public static final String DEFAULT_SEEDS = "Lemon";
+
+    public static final String KEY_MONEY = "KEY_MONEY";
+
+    private static final String SHARED_PREFERENCES_KEY = "SHARED_PREFERENCES_KEY";
+    private static SharedPreferences sharedPreferences;
+    private static SharedPreferences.Editor editor;
 
     private static MutableLiveData<String> timerText;
     private static MutableLiveData<String> timerTextSeconds;
@@ -58,7 +66,22 @@ public class HomeDataSource {
         };
     }
 
-    public static void collectPlant(boolean fruitInInventory){
+    public static void initSharedPreferences(Context context){
+        sharedPreferences = context.getSharedPreferences(SHARED_PREFERENCES_KEY, Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+    }
 
+    public static void save(int moneyToSave){
+        editor.putInt(KEY_MONEY, moneyToSave);
+        editor.apply();
+    }
+
+    public static void increaseMoney(int delta){
+        editor.putInt(KEY_MONEY, loadMoney() + delta);
+        editor.apply();
+    }
+
+    public static int loadMoney(){
+        return sharedPreferences.getInt(KEY_MONEY, -1);
     }
 }
